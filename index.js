@@ -19,7 +19,7 @@ client.on('ready', () => {
         activity: activity,
         status: 'online',
     });
-    };
+  };
 });
  
 client.login(process.env.TOKEN);
