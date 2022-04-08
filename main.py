@@ -1,19 +1,25 @@
-import discord, os, keep_alive, asyncio, datetime, pytz
-
-
-from discord.ext import tasks, commands
-
-client = commands.Bot(
-  command_prefix=':',
-  self_bot=True
-)
-
-
-
-@client.event
-async def on_connect():
-  await client.change_presence(activity = discord.Streaming(name = "Frown Cloud", url = "https://frownmc.xyz"))
-
-
-keep_alive.keep_alive()
-client.run(os.getenv("TOKEN"), bot=False)
+const Discord = require('discord.js-selfbot');
+const client = new Discord.Client();
+ 
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  const updatePresence = async (client, state) => {
+    // Set the presence
+    const activity = {
+        name: 'Frown Cloud',
+        type: 'WATCHING',
+        details: 'frownmc.xyz',
+        state: state,
+        timestamps: {
+            start: Date.now(),
+        },
+     };
+    client.user.setPresence({
+        pid: process.pid,
+        activity: activity,
+        status: 'online',
+    });
+    };
+});
+ 
+client.login(process.env.TOKEN);
